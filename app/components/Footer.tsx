@@ -11,7 +11,7 @@ export function Footer() {
           <div>
             <h2 className="mb-4 text-lg font-semibold">Shur Store</h2>
             <p className="text-gray-400 mb-4">
-              Монгол кашмерийн шилдэг чанарыг дэлхийд хүргэж буй манай брэнд таны итгэлийг үнэлж байна.
+              Монгол кашмерийн шилдэг чанарыг таньд хүргэнэ.
             </p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors">
@@ -29,7 +29,7 @@ export function Footer() {
           {/* Quick Links */}
           <nav>
             <h2 className="mb-4 text-lg font-semibold">Холбоос</h2>
-            <ul className="space-y-2">
+            <ul className="space-y-1 text-base">
               <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">Бидний тухай</a></li>
               <li><a href="/products" className="text-gray-400 hover:text-white transition-colors">Бүтээгдэхүүн</a></li>
               <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors">Блог</a></li>
@@ -40,7 +40,7 @@ export function Footer() {
           {/* Customer Service */}
           <nav>
             <h2 className="mb-4 text-lg font-semibold">Үйлчлүүлэгч</h2>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li><a href="/shipping" className="text-gray-400 hover:text-white transition-colors">Хүргэлтийн мэдээлэл</a></li>
               <li><a href="/returns" className="text-gray-400 hover:text-white transition-colors">Буцаах бодлого</a></li>
               <li><a href="/terms" className="text-gray-400 hover:text-white transition-colors">Үйлчилгээний нөхцөл</a></li>
@@ -51,10 +51,10 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h2 className="mb-4 text-lg font-semibold">Холбоо барих</h2>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               <li className="flex items-start gap-2 text-gray-400">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <span>Улаанбаатар хот, Сүхбаатар дүүрэг</span>
+                <span>Ховд аймаг, Номин худалдааны төв 2 давхар </span>
               </li>
               <li className="flex items-center gap-2 text-gray-400">
                 <Phone className="w-5 h-5 flex-shrink-0" aria-hidden="true" />

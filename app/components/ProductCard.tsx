@@ -1,5 +1,4 @@
 "use client"; // 👈 энэ мөрийг хамгийн эхэнд нэмнэ
-
 import { Heart, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -14,17 +13,19 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
+  onClick?: () => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onClick }: ProductCardProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="group relative bg-white border border-gray-200 overflow-hidden transition-shadow hover:shadow-lg"
+      className="group relative bg-white border border-gray-200 overflow-hidden transition-shadow hover:shadow-lg cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       {/* Image Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
@@ -36,7 +37,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Like Button */}
         <button
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsLiked(!isLiked);
+          }}
           className="absolute top-3 right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors"
         >
           <Heart
@@ -54,7 +58,10 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Add to Cart Button - Shows on hover */}
         {isHovered && (
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
-            <button className="w-full bg-white text-gray-900 py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors">
+            <button 
+              onClick={(e) => e.stopPropagation()}
+              className="w-full bg-white text-gray-900 py-2 px-4 flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"
+            >
               <ShoppingCart className="w-4 h-4" />
               Сагслах
             </button>

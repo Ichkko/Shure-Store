@@ -10,7 +10,7 @@ export function Hero() {
         alt="Hero"
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/20 bg-opacity-30 flex items-center justify-center">
         <div className="text-center text-white px-4">
           <h2 className="text-5xl md:text-6xl mb-4 tracking-tight">
             Монгол Кашмер
