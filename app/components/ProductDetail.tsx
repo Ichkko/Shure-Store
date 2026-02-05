@@ -72,6 +72,7 @@ export function ProductDetail({ productId, onNavigate }: ProductDetailProps) {
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-cover"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
               <button
                 onClick={() => setIsLiked(!isLiked)}
@@ -91,7 +92,7 @@ export function ProductDetail({ productId, onNavigate }: ProductDetailProps) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square bg-gray-100 overflow-hidden border-2 ${
+                  className={`relative aspect-square bg-gray-100 overflow-hidden border-2 ${
                     selectedImage === index ? 'border-gray-900' : 'border-transparent'
                   }`}
                 >
@@ -99,6 +100,7 @@ export function ProductDetail({ productId, onNavigate }: ProductDetailProps) {
                     src={image}
                     alt={`${product.name} ${index + 1}`}
                     className="w-full h-full object-cover"
+                    sizes="(min-width: 1024px) 12vw, 20vw"
                   />
                 </button>
               ))}

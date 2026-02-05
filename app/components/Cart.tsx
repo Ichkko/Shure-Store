@@ -83,11 +83,12 @@ export function Cart() {
             {cartItems.map(item => (
               <div key={item.id} className="bg-white p-4 sm:p-6 border border-gray-200 flex gap-4">
                 {/* Image */}
-                <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 bg-gray-100 overflow-hidden">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 bg-gray-100 overflow-hidden">
                   <ImageWithFallback
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover"
+                    sizes="(min-width: 640px) 128px, 96px"
                   />
                 </div>
 

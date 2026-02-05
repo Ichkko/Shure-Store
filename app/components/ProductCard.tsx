@@ -33,6 +33,7 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
         />
 
         {/* Like Button */}

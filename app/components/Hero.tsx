@@ -9,6 +9,8 @@ export function Hero() {
         src="https://images.unsplash.com/photo-1486776396733-b352f7608a46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwbW9kZWwlMjB3aW50ZXJ8ZW58MXx8fHwxNzY0NzUxMDg3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
         alt="Hero"
         className="w-full h-full object-cover"
+        sizes="100vw"
+        priority
       />
       <div className="absolute inset-0 bg-black/20 bg-opacity-30 flex items-center justify-center">
         <div className="text-center text-white px-4">
