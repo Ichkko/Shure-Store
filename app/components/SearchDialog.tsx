@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface Product {
   id: number;
@@ -174,11 +175,14 @@ export function SearchDialog({ isOpen, onClose, onProductClick }: SearchDialogPr
                   onClick={() => handleProductClick(product.id)}
                   className="w-full p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors text-left"
                 >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-16 h-16 object-cover flex-shrink-0"
-                  />
+                  <div className="relative w-16 h-16 flex-shrink-0">
+                    <ImageWithFallback
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                      sizes="64px"
+                    />
+                  </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-gray-900 truncate">{product.name}</h3>
                     <p className="text-sm text-gray-500">{product.category}</p>

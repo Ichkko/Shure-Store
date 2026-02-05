@@ -175,11 +175,12 @@ export function Profile() {
                       className="border border-gray-200 p-4 hover:border-gray-400 transition-colors"
                     >
                       <div className="flex gap-4">
-                        <div className="w-20 h-20 bg-gray-100 flex-shrink-0 overflow-hidden">
+                        <div className="relative w-20 h-20 bg-gray-100 flex-shrink-0 overflow-hidden">
                           <ImageWithFallback
                             src={order.image}
                             alt="Order"
                             className="w-full h-full object-cover"
+                            sizes="80px"
                           />
                         </div>
                         <div className="flex-1">
