@@ -2,14 +2,7 @@
 import { Heart, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  image: string;
-  category: string;
-}
+import { Product } from '../types/product';
 
 interface ProductCardProps {
   product: Product;
