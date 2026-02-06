@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { useProducts } from '../hooks/useProducts';
 
 interface MensProductsProps {
   onProductClick: (productId: number) => void;
@@ -17,72 +18,8 @@ export function MensProducts({ onProductClick }: MensProductsProps) {
   const priceRanges = ['Бүгд', '₮100,000 - ₮300,000', '₮300,000 - ₮500,000', '₮500,000+'];
   const sortOptions = ['Шинэ', 'Үнэ: Багаас их', 'Үнэ: Ихээс бага', 'Алдартай'];
 
-  const allProducts = [
-    {
-      id: 5,
-      name: 'Кашмер кардиган - Цэнхэр',
-      price: '₮410,000',
-      image: 'https://images.unsplash.com/photo-1603906650843-b58e94d9df4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXNobWVyZSUyMHN3ZWF0ZXJ8ZW58MXx8fHwxNzY0Nzg2MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Кардиган',
-      priceValue: 410000
-    },
-    {
-      id: 7,
-      name: 'Кашмер жилэт - Улаан',
-      price: '₮580,000',
-      image: 'https://images.unsplash.com/photo-1759326739735-fd2b783c763d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBrbml0d2VhcnxlbnwxfHx8fDE3NjQ3ODYzMzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Жилэт',
-      priceValue: 580000
-    },
-    {
-      id: 9,
-      name: 'Кашмер цамц - Хар',
-      price: '₮450,000',
-      image: 'https://images.unsplash.com/photo-1603906650843-b58e94d9df4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXNobWVyZSUyMHN3ZWF0ZXJ8ZW58MXx8fHwxNzY0Nzg2MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Цамц',
-      priceValue: 450000
-    },
-    {
-      id: 10,
-      name: 'Кашмер өмд - Саарал',
-      price: '₮380,000',
-      image: 'https://images.unsplash.com/photo-1759326739735-fd2b783c763d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBrbml0d2VhcnxlbnwxfHx8fDE3NjQ3ODYzMzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Өмд',
-      priceValue: 380000
-    },
-    {
-      id: 11,
-      name: 'Кашмер хүрэм - Бор',
-      price: '₮620,000',
-      image: 'https://images.unsplash.com/photo-1553808373-b2c5b7ddb117?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwd29tYW4lMjBmYXNoaW9ufGVufDF8fHx8MTc2NDc3MzM2N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Хүрэм',
-      priceValue: 620000
-    },
-    {
-      id: 12,
-      name: 'Кашмер цамц - Ногоон',
-      price: '₮440,000',
-      image: 'https://images.unsplash.com/photo-1603906650843-b58e94d9df4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXNobWVyZSUyMHN3ZWF0ZXJ8ZW58MXx8fHwxNzY0Nzg2MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Цамц',
-      priceValue: 440000
-    },
-    {
-      id: 13,
-      name: 'Кашмер кардиган - Цагаан',
-      price: '₮395,000',
-      image: 'https://images.unsplash.com/photo-1759326739735-fd2b783c763d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBrbml0d2VhcnxlbnwxfHx8fDE3NjQ3ODYzMzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Кардиган',
-      priceValue: 395000
-    },
-    {
-      id: 14,
-      name: 'Кашмер өмд - Хар',
-      price: '₮390,000',
-      image: 'https://images.unsplash.com/photo-1603906650843-b58e94d9df4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXNobWVyZSUyMHN3ZWF0ZXJ8ZW58MXx8fHwxNzY0Nzg2MzMxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      category: 'Өмд',
-      priceValue: 390000
-    }
-  ];
+  const { products, isLoading, error } = useProducts();
+  const allProducts = products.filter((product) => product.gender === 'Эрэгтэй');
 
   // Filter products
   let filteredProducts = [...allProducts];
@@ -98,24 +35,24 @@ export function MensProducts({ onProductClick }: MensProductsProps) {
   if (priceRange !== 'Бүгд') {
     if (priceRange === '₮100,000 - ₮300,000') {
       filteredProducts = filteredProducts.filter(
-        (product) => product.priceValue >= 100000 && product.priceValue < 300000
+        (product) => (product.priceValue ?? 0) >= 100000 && (product.priceValue ?? 0) < 300000
       );
     } else if (priceRange === '₮300,000 - ₮500,000') {
       filteredProducts = filteredProducts.filter(
-        (product) => product.priceValue >= 300000 && product.priceValue < 500000
+        (product) => (product.priceValue ?? 0) >= 300000 && (product.priceValue ?? 0) < 500000
       );
     } else if (priceRange === '₮500,000+') {
       filteredProducts = filteredProducts.filter(
-        (product) => product.priceValue >= 500000
+        (product) => (product.priceValue ?? 0) >= 500000
       );
     }
   }
 
   // Sort products
   if (sortBy === 'Үнэ: Багаас их') {
-    filteredProducts.sort((a, b) => a.priceValue - b.priceValue);
+    filteredProducts.sort((a, b) => (a.priceValue ?? 0) - (b.priceValue ?? 0));
   } else if (sortBy === 'Үнэ: Ихээс бага') {
-    filteredProducts.sort((a, b) => b.priceValue - a.priceValue);
+    filteredProducts.sort((a, b) => (b.priceValue ?? 0) - (a.priceValue ?? 0));
   }
 
   return (
@@ -211,7 +148,15 @@ export function MensProducts({ onProductClick }: MensProductsProps) {
         </div>
 
         {/* Products Grid */}
-        {filteredProducts.length > 0 ? (
+        {isLoading ? (
+          <div className="text-center py-16">
+            <p className="text-gray-600">Бүтээгдэхүүнүүдийг уншиж байна...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <p className="text-gray-600">{error}</p>
+          </div>
+        ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <div key={product.id} onClick={() => onProductClick(product.id)}>
