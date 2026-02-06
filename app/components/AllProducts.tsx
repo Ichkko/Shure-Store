@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { useCategories } from '../hooks/useCategories';
 import { useProducts } from '../hooks/useProducts';
 
 interface AllProductsProps {
@@ -14,12 +15,18 @@ export function AllProducts({ onProductClick }: AllProductsProps) {
   const [sortBy, setSortBy] = useState<string>('Шинэ');
   const [showFilters, setShowFilters] = useState(false);
 
-  const categories = ['Бүгд', 'Эрэгтэй', 'Эмэгтэй', 'Нэмэлт хэрэгсэл'];
+  const defaultCategories = ['Эрэгтэй', 'Эмэгтэй', 'Нэмэлт хэрэгсэл'];
   const priceRanges = ['Бүгд', '₮100,000 - ₮300,000', '₮300,000 - ₮500,000', '₮500,000+'];
   const sortOptions = ['Шинэ', 'Үнэ: Багаас их', 'Үнэ: Ихээс бага', 'Алдартай'];
 
+  const {
+    categories: apiCategories,
+    isLoading: categoriesLoading,
+    error: categoriesError
+  } = useCategories({ fallbackCategories: defaultCategories });
   const { products, isLoading, error } = useProducts();
   const allProducts = products;
+  const categories = ['Бүгд', ...apiCategories];
 
   // Filter products
   let filteredProducts = [...allProducts];
@@ -87,6 +94,7 @@ export function AllProducts({ onProductClick }: AllProductsProps) {
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
+                    disabled={categoriesLoading}
                     className="w-full px-4 py-2 border border-gray-300 bg-white text-gray-900 appearance-none cursor-pointer hover:border-gray-400 transition-colors"
                   >
                     {categories.map((category) => (
@@ -97,6 +105,9 @@ export function AllProducts({ onProductClick }: AllProductsProps) {
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
                 </div>
+                {categoriesError && (
+                  <p className="mt-1 text-xs text-red-500">{categoriesError}</p>
+                )}
               </div>
 
               {/* Price Filter */}
